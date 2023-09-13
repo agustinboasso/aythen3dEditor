@@ -1,0 +1,43 @@
+name: Clean, Build, Commit, Push
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+
+    - name: Clean build folder
+      run: |
+        find dist -maxdepth 1 -type f -delete
+        git add -u 
+    
+    - name: Build dist
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: | 
+        npm ci
+        npm run build
+
+    - name: Commit Changes
+      run: |
+          git config --local user.name "github-bot"
+          git add dist/* -f
+          git commit -m "Update build files"
+    
+    - name: Push Changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
+        branch: main
