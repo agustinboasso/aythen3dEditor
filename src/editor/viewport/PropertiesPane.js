@@ -102,20 +102,9 @@ export default class PropertiesPane extends dat.GUI {
         addMeshFolder.add(objectGenerator, 'addCone').name('Cone').onFinishChange(() => objectGenerator.unsetSharedMaterial());
         addMeshFolder.add(objectGenerator, 'addTorus').name('Torus').onFinishChange(() => objectGenerator.unsetSharedMaterial());
         addMeshFolder.add(objectGenerator, 'addText').name('Text').onFinishChange(() => objectGenerator.unsetSharedMaterial());
-        this.loadHelicopter = () => {
-            objectGenerator.addObj(
-                './models/Seahawk.obj',
-                true,
-                'Helicopter',
-                (helicopter) => {
-                    helicopter.scale.x *= 0.1;
-                    helicopter.scale.y *= 0.1;
-                    helicopter.scale.z *= 0.1;
-                }
-            );
-        };
+    
         addMeshFolder.add(objectGenerator, 'addSpiralGalaxy').name('Spiral Galaxy');
-        this.addObjectFolder.add(this, 'loadHelicopter').name('Helicopter');
+        
         this.addObjectFolder.add(objectGenerator, 'addCamera').name('Camera');
         let addLightFolder = this.addObjectFolder.addFolder('Light');
         let ambientOption = addLightFolder.add(objectGenerator, 'addAmbientLight').name('Ambient').onChange(() => {
