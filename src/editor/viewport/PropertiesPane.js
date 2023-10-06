@@ -1,5 +1,6 @@
 import * as dat from 'dat.gui';
 import { PCFShadowMap, PCFSoftShadowMap } from 'three';
+import './PropertiesPanel.css'
 
 export default class PropertiesPane extends dat.GUI {
 

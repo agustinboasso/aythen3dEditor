@@ -9,6 +9,7 @@ import Viewport from './viewport/Viewport';
 
 export default class Editor {
     constructor(viewportCanvas, propertiesPaneContainer) {
+        console.log(viewportCanvas)
         //TODO:add menubar
 
         //creating properties pane 
