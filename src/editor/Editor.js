@@ -14,7 +14,7 @@ export default class Editor {
 
         //creating properties pane 
         this.propertiesPane = new PropertiesPane(propertiesPaneContainer);
-        this.propertiesPane.open();
+
 
         //add viewport
         this.viewport = new Viewport(viewportCanvas, viewportCanvas.getBoundingClientRect().width, viewportCanvas.getBoundingClientRect().height);
@@ -39,7 +39,7 @@ export default class Editor {
         this.objectGenerator = new ObjectGenerator(this.viewport, this.sceneOutliner, this.cameraSelector);
         //add addMesh menu
         this.propertiesPane.bindObjectGenerator(this.objectGenerator);
-
+            console.log(this.objectGenerator)
         MeshPropertyController.assetsManager = this.objectGenerator.assetsManager;
         //add initial objects
         this.initObjects();

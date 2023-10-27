@@ -107,10 +107,14 @@ export default class MeshPropertyController extends PropertyController {
     }
 
     onAddMaterial(event) {
-        let option = document.createElement("option");
-        option.value = event.assetId;
-        option.innerHTML = event.assetId;
-        this.assetIdProperty.__select.appendChild(option);
+        const newMaterialOption = document.createElement('option')
+        newMaterialOption.innerHTML = event.assetId
+        newMaterialOption.value = event.assetId
+        if (this.assetIdProperty && this.assetIdProperty.addEventListener) {
+            this.assetIdProperty.addEventListener('load', () => {
+              this.assetIdProperty.appendChild(newMaterialOption)
+            })
+          }
     }
 
     onRemoveMaterial(event) {
